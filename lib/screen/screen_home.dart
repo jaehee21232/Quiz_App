@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screen/screen_quiz.dart';
+import '../models/model_quiz.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -8,6 +10,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Quiz> quizs = [
+    Quiz.fromMap({
+      'title': "test",
+      "candidates": ["a", "b", "c", "d"],
+      "answer": 0
+    }),
+    Quiz.fromMap({
+      'title': "test",
+      "candidates": ["a", "b", "c", "d"],
+      "answer": 0
+    }),
+    Quiz.fromMap({
+      'title': "test",
+      "candidates": ["a", "b", "c", "d"],
+      "answer": 0
+    })
+  ];
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -72,17 +91,22 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.only(bottom: width * 0.036),
             child: Center(
               child: ButtonTheme(
-                minWidth: width * 0.8,
-                height: height * 0.05,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
-                child: ElevatedButton(
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.deepPurple,
+                      minimumSize: Size(width * 0.8, height * 0.05)),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => QuizScreen(quizs: quizs))));
+                  },
                   child: Text(
                     '지금 퀴즈 풀기',
                     style: TextStyle(color: Colors.white),
                   ),
-                  style: ElevatedButton.styleFrom(primary: Colors.deepPurple),
-                  onPressed: () {},
                 ),
               ),
             ),
